@@ -1,7 +1,16 @@
-import {Stack} from "expo-router"
+import React from 'react';
+import {Stack} from "expo-router";
 
-const Layout = ()=> {
-    return <Stack/>
-}
+const _layout = () => {
+    return (
+        <Stack>
+            <Stack.Screen name={"index"} options={{
+                headerTitle: "Home Page",
+            }}/>
+            <Stack.Screen name={"users/[id]"} options={{
+                headerTitle: "User Page",
+            }}/>
+        </Stack>)
+};
 
-export default Layout;
+export default _layout;
