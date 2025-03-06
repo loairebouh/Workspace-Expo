@@ -1,21 +1,20 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
-import {Link, router} from "expo-router";
+import { View, Text, TouchableOpacity } from "react-native";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { router } from "expo-router";
+import firebase from "firebase/compat";
+import auth = firebase.auth;
 
-const index = () => {
-    return (
-        <View>
-            <Text>index</Text>
-            <Link href="/users/1">Go to user 1</Link>
-            <Pressable onPress={()=>
-                router.push({
-                pathname:"/users/[id]",
-                params: {id: 2}
-            })}>
-                <Text>Go to user 2 </Text>
-            </Pressable>
-        </View>
-    );
+export default function TabOneScreen() {
+  getAuth().onAuthStateChanged((user) => {
+    if (!user) router.replace("/");
+  });
+  return (
+    <View>
+      <TouchableOpacity onPress={() => auth().signOut()}>
+        <Text className={"text-3xl font-bold text-center"}>Log Out</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
-export default index;
